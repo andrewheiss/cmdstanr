@@ -577,7 +577,7 @@ compile <- function(quiet = TRUE,
   }
   stancflags_combined <- stanc_built_options
   stancflags_local <- get_cmdstan_flags("STANCFLAGS")
-  if (stancflags_local != "") {
+  if (any(stancflags_local != "")) {
     stancflags_combined <- c(stancflags_combined, stancflags_local)
   }
   stancflags_standalone <- c("--standalone-functions", stancflags_val, stancflags_combined)
