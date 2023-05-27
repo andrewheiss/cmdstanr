@@ -669,6 +669,12 @@ get_cmdstan_flags <- function(flag_name) {
     wd = cmdstan_path
   )$stdout
 
+  flags <- flags[grep("make\\[[0-9*]\\]:", flags, invert = TRUE)]
+
+  if (length(flags) == 0) {
+    return("")
+  }
+
   flags <- gsub("\n", "", flags, fixed = TRUE)
 
   flags <- gsub(
@@ -676,7 +682,7 @@ get_cmdstan_flags <- function(flag_name) {
     replacement = "", x = flags
   )
 
-  if (flags == "") {
+  if (all(flags == "")) {
     return(flags)
   }
 
